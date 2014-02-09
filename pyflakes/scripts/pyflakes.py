@@ -65,9 +65,9 @@ def checkPath(filename):
     """
     # TODO: this should return messages like check would above for files not found
     try:
-        return check(file(filename, 'U').read() + '\n', filename)
+        return check(open(filename, 'r').read() + '\n', filename)
     except IOError as msg:
-        print >> sys.stderr, "%s: %s" % (filename, msg.args[1])
+        print("%s: %s" % (filename, msg.args[1]), file=sys.stderr)
         raise SystemExit
 
 def main():
@@ -115,14 +115,14 @@ def main():
                 sums[message.level] = 1
             else:
                 sums[message.level] += 1
-            print message
+            print(message)
 
 
     failed = bool(sums.get('E'))
 
     if sums:
-        print
-        print '%s! %s' % (failed and 'Failed' or 'Done', ', '.join('%s=%s' % (k, v) for k, v in sorted(sums.iteritems())))
+        print()
+        print('%s! %s' % (failed and 'Failed' or 'Done', ', '.join('%s=%s' % (k, v) for k, v in sorted(sums.iteritems()))))
 
     raise SystemExit(failed)
 
