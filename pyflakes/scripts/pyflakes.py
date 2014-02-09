@@ -1,4 +1,3 @@
-
 """
 Implementation of the command-line I{pyflakes} tool.
 """
@@ -30,7 +29,7 @@ def check(codeString, filename):
     # First, compile into an AST and handle syntax errors.
     try:
         tree = compile(codeString, filename, "exec", _ast.PyCF_ONLY_AST)
-    except (SyntaxError, IndentationError), value:
+    except (SyntaxError, IndentationError) as value:
         msg = value.args[0]
 
         (lineno, offset, text) = value.lineno, value.offset, value.text
@@ -67,7 +66,7 @@ def checkPath(filename):
     # TODO: this should return messages like check would above for files not found
     try:
         return check(file(filename, 'U').read() + '\n', filename)
-    except IOError, msg:
+    except IOError as msg:
         print >> sys.stderr, "%s: %s" % (filename, msg.args[1])
         raise SystemExit
 
