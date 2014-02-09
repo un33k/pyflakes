@@ -2,11 +2,7 @@
 # (c) 2005-2010 Divmod, Inc.
 # See LICENSE file for details
 
-try:
-    import __builtin__
-except ImportError:
-    import builtins
-
+import __builtin__
 import os.path
 import _ast
 
@@ -304,7 +300,7 @@ class Checker(object):
     def handleNode(self, node, parent):
         node.parent = parent
         if self.traceTree:
-            print('  ' * self.nodeDepth + node.__class__.__name__)
+            print '  ' * self.nodeDepth + node.__class__.__name__
         self.nodeDepth += 1
         if self.futuresAllowed and not \
                (isinstance(node, _ast.ImportFrom) or self.isDocstring(node)):
@@ -316,7 +312,7 @@ class Checker(object):
         finally:
             self.nodeDepth -= 1
         if self.traceTree:
-            print('  ' * self.nodeDepth + 'end ' + node.__class__.__name__)
+            print '  ' * self.nodeDepth + 'end ' + node.__class__.__name__
 
     def ignore(self, node):
         pass
